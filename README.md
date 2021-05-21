@@ -1,7 +1,7 @@
 # Kaggle_Titanic
 Using Kaggle's Titanic Passenger Dataset predict which Passengers survived and which Passengers perished 
 
-Kaggle Challenge Description
+## Kaggle Challenge Description
 
 The sinking of the Titanic is one of the most infamous shipwrecks in history.
 
