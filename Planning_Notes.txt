@@ -1,0 +1,17 @@
+1 - Look at the big picture
+2 - Get the Data
+3 - Explore the Data
+4 - Prepare the Data for ML algorithms
+5 - Explore many different Models and shortlist the best ones
+6 - Fine tune Models and combine them into a great solution
+7 - Test the Model
+
+1 - Look at the big picture
+    a - How should you frame this problem?
+        - Supervised
+        - Multiple Univariate Classification
+        - Batch Learning
+    b - How should performance be measured?
+        - The percentage of passengers you correctly predict. This is known as accuracy.
+        - Performance measure for 'Multiple Univariate Classification problem?
+    c - List the assumptions you or others have made so far
