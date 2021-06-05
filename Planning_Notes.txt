@@ -1,17 +1,92 @@
 1 - Look at the big picture
-2 - Get the Data
-3 - Explore the Data
-4 - Prepare the Data for ML algorithms
-5 - Explore many different Models and shortlist the best ones
-6 - Fine tune Models and combine them into a great solution
-7 - Test the Model
+2 - Set up environment
+3 - Get the Data
+4 - Explore the Data
+5 - Prepare the Data for ML algorithms
+6 - Explore many different Models and shortlist the best ones
+7 - Fine tune Models and combine them into a great solution
+8 - Test the Model
 
 1 - Look at the big picture
     a - How should you frame this problem?
         - Supervised
-        - Multiple Univariate Classification
+        - Multiple
+        - Univariate
+        - Binary Classification
         - Batch Learning
     b - How should performance be measured?
-        - The percentage of passengers you correctly predict. This is known as accuracy.
-        - Performance measure for 'Multiple Univariate Classification problem?
+        - The percentage of passengers you correctly predict. This is known as accuracy. The Final Measure.
+        - Performance measure for 'Multiple Univariate Binary Classification' problem?
+            - Create Confusion Matrix
+            - f(x) = Precision, x = Recall
+            - f(x) = Precision, Recall, x = Threshold
+            - f(x) = False Positive ratio, x = Recall (ROC Curve)
     c - List the assumptions you or others have made so far
+
+4 - Explore the data
+    a - Correlation between the different attributes
+    b - Correlation between the different attributes and the labels
+        Attributes which require processing first:
+            i - Ticket. Potentially investigate ticket content further to extract useful info.
+                - deck level
+            ii - Cabin. Change to number of passengers sharing cabin.
+                1 - Why do some passengers have multiple cabins? Paid for multiple I think
+                2 - Skip for now. Lots of missing data
+            iii - Embarked.
+                1 - Missing two values. OneHotEncoded but corr matrix doesn't compute correlation
+    c - General Observations
+        i - Mean > (Value >= 75% of Passengers) for Fare, SibSP, Parch
+        ii - High Value Outliers for Fare and SibSP
+        iii - Why is there an increase at SibSp extremity?
+        iv - Why is there an increase at age extremity?
+        v - Attributes have very different scales
+        vi - Lots of tail heavy attributes
+        vii - Lots of missing data for Cabin
+
+5 - Prepare the Data for ML algorithms (increase signal to noise)
+    a - Handle Non Numeric Attributes
+        i - Sex
+        ii - Cabin. Drop this initially
+    b - Do Classification Models that I'll use prefer Numeric attributes? Drop encoded if not
+    c - Extract more info from existing attributes
+        i - Investigate survival rates of the very young and the very old (future work)
+        ii - Investigate ticket content (future work)
+    d - remove labels from dataset
+    e - handle non null attributes
+
+To Do
+- 5
+- Attribute scaling
+- Handle tail heavy attributes
+- Select a Binary classifier
+- Decide how to present the data to the classifiers
+    - Do any features require additional processing?
+    - Drop features that seem useless
+    - Any obvious feature engineering?
+
+To Do 31/05
+- Quickly review exploration of data
+- Prepare the data for ML models
+    - read through relevant sections in C1 and C2
+    - Select a Binary Classifier
+        - Stochastic Gradient Descent Classifier
+        - Expects an array of Float
+        - For best results using the default learning rate schedule, the data should have zero mean and unit variance.
+            - Does attribute scaling address this?
+    - Test Model without any feature processing
+    - Drop features that seem useless
+        - SGD Classifier failing to convert string to float. Drop or convert
+        - Dropped name
+        - Ticket
+        - Cabin
+        - Dropped Embark for now
+    - Do any features require additional processing?
+        - Convert Sex
+        - Replace "age" NaN values with median age using an imputer
+        - Convert Embarked
+        - Convert Embarked_1hot
+            - attempted to convert to numpy array but was unable to pass as attribute to data frame
+- Train and test the model using cross validation
+    - array([0.64309764, 0.62289562, 0.61616162])
+- Always Survives Performance
+    - array([0.64309764, 0.56902357, 0.63636364])
